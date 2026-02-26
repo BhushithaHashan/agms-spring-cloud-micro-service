@@ -7,6 +7,8 @@ spring:
         enabled: true
         service-id: config-server 
       fail-fast: true # If it can't find the Vault, it stops immediately (cleaner)
+  config:
+    import: "optional:configserver:"
 
 eureka:
   client:

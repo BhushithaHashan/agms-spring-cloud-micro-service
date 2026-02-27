@@ -1,3 +1,11 @@
+package com.agms.zone_service.service;
+
+import com.agms.zone_service.entity.Zone;
+import com.agms.zone_service.repository.ZoneRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ZoneService {
@@ -8,10 +16,6 @@ public class ZoneService {
     }
 
     public Zone createZone(Zone zone) {
-        
-        if (zone.getName() == null || zone.getName().isEmpty()) {
-            throw new RuntimeException("Zone name cannot be empty");
-        }
         return repository.save(zone);
     }
 }

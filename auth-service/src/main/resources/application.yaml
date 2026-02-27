@@ -1,3 +1,20 @@
 spring:
   application:
     name: auth-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server 
+      fail-fast: true # If it can't find the Vault, it stops immediately (cleaner)
+      retry:
+        max-attempts: 6      # Try 6 times
+        initial-interval: 2000 # Wait 2 seconds between tries
+        multiplier: 1.5
+  config:
+    import: "optional:configserver:"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

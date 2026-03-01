@@ -8,9 +8,9 @@ spring:
         service-id: config-server 
       fail-fast: true # If it can't find the Vault, it stops immediately (cleaner)
       retry:
-        max-attempts: 6      # Try 6 times
-        initial-interval: 2000 # Wait 2 seconds between tries
-        multiplier: 1.5
+        initial-interval: 1000
+        max-interval: 2000 
+        max-attempts: 6
   config:
     import: "optional:configserver:"
 

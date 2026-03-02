@@ -24,4 +24,11 @@ public class ZoneController {
         // FIXED: Calling service method instead of accessing private repository
         return service.getAllZones();
     }
+    @GetMapping("/{id}")
+    public Zone getById(@PathVariable Long id) {
+        return service.getAllZones().stream()
+                .filter(z -> z.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Zone not found with ID: " + id));
+    }
 }

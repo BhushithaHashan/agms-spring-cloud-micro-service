@@ -1,23 +1,30 @@
 package com.agms.auth_service.controller;
 
+import com.agms.auth_service.entity.UserCredential;
 import com.agms.auth_service.service.AuthService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    @PostMapping("/register")
+    public String register(@RequestBody UserCredential user) {
+        return authService.registerInternalUser(user);
     }
 
-    @GetMapping("/token")
-    public String getToken() {
-        // This calls the service logic we wrote earlier (Login -> Register -> Login)
-        return authService.getValidToken();
+    @PostMapping("/login")
+    public String login(@RequestParam String username, @RequestParam String password) {
+        authService.validatePassword(username, password);
+        return authService.generateInternalToken(username);
+    }
+
+    @GetMapping("/external-iot-token")
+    public String getIotToken() {
+        return authService.getExternalIotToken();
     }
 }

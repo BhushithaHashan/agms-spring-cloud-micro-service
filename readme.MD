@@ -1,5 +1,4 @@
-```markdown
-# 🌱 Automated Greenhouse Management System (AGMS)
+#  Automated Greenhouse Management System (AGMS)
 
 A cloud native microservices ecosystem designed to monitor crop health, manage cultivation zones, and automate climate responses using real-time IoT data.
 
@@ -41,18 +40,18 @@ AGMS is built using a **Spring Cloud distributed architecture** following a "Gat
 | **Config Server** | `8888` | Centralized Git-backed configuration |
 | **API Gateway** | `8080` | Single entry point — JWT validation & routing |
 | **Auth Service** | `8081` | User registration, login, JWT issuance |
-| **Zone Service** | — | Manages physical greenhouse sectors & device mappings |
-| **Crop Service** | — | Maintains planting plans & optimal thresholds |
-| **Sensor Service** | — | The "Brain" — polls IoT API & triggers automation |
+| **Zone Service** | `8082` | Manages physical greenhouse sectors & device mappings |
+| **Crop Service** | `8083` | Maintains planting plans & optimal thresholds |
+| **Sensor Service** | `8084` | The "Brain" — polls IoT API & triggers automation |
 
 ---
 ## Key Features
 
-- 🔐 **Centralized Security** — Stateless JWT authentication enforced at the Gateway
-- 📡 **IoT Integration** — Sensor service polls external IoT provider (`104.211.95.241`)
-- 🤖 **Edge Automation** — Scheduled tasks compare real-time data against crop thresholds
-- 🌱 **Relational Management** — Crops are assigned to specific Zones with optimal conditions
-- ☁️ **Cloud Native** — Centralized config via Spring Cloud Config + Eureka service discovery
+-  **Centralized Security** — Stateless JWT authentication enforced at the Gateway
+-  **IoT Integration** — Sensor service polls external IoT provider (`104.211.95.241`)
+-  **Edge Automation** — Scheduled tasks compare real-time data against crop thresholds
+-  **Relational Management** — Crops are assigned to specific Zones with optimal conditions
+-  **Cloud Native** — Centralized config via Spring Cloud Config + Eureka service discovery
 
 ---
 
@@ -82,7 +81,7 @@ AGMS is built using a **Spring Cloud distributed architecture** following a "Gat
 
 ---
 
-### 1. Config Repository Setup ⚠️ CRITICAL
+### 1. Config Repository Setup 
 
 This project uses a **centralized config repository** hosted on GitHub:
 
@@ -108,7 +107,7 @@ The JWT Secret Key is **not included in the source code** for security. You must
    git push
    ```
 
-> ⚠️ This secret **must match** between the Auth Service and the API Gateway. If they differ, all requests will return `401 Unauthorized`.
+>  This secret **must match** between the Auth Service and the API Gateway. If they differ, all requests will return `401 Unauthorized`.
 
 ---
 
@@ -159,7 +158,7 @@ The Sensor Service runs a **pulse every 10 seconds**:
 ```
 1. Fetch   → Get all active crops and their optimal temperatures
 2. Lookup  → Find the corresponding deviceId for each zone
-3. Poll    → Call external IoT API (104.211.95.241) for real-time temperature
+3. Poll    → Call external IoT API (104.211.95.241) for real time temperature
 4. Evaluate → Compare actual vs target
              If variance > 2°C → trigger system alert in logs
 ```
